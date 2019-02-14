@@ -1,14 +1,55 @@
-server:
-  port: ${PORT:8761}
+spring:
+  profiles: peer1
 eureka:
-  server:
-    enable-self-preservation: false
-    eviction-interval-timer-in-ms: 30
-    response-cache-update-interval-ms: 3000
+  instance:
+    hostname: peer1
+    metadata-map:
+      zone: zone1
   client:
-    register-with-eureka: false
-    fetch-registry: false
-    disable-delta: true
+    service-url:
+      defaultZone:
+        http://localhost:8762/eureka/,http://localhost:8763/eureka/
+server:
+  port: ${PORT:8760}
+---
+spring:
+  profiles: peer2
+eureka:
+  instance:
+    hostname: peer2
+    metadata-map:
+      zone: zone2
+  client:
+    service-url:
+      defaultZone:
+        http://localhost:8760/eureka/,http://localhost:8763/eureka/
+server:
+  port: ${PORT:8762}
+---
+spring:
+  profiles: peer3
+eureka:
+  instance:
+    hostname: peer3
+    metadata-map:
+      zone: zone3
+  client:
+    service-url:
+      defaultZone:
+        http://localhost:8760/eureka/,http://localhost:8762/eureka/
+server:
+  port: ${PORT:8763}
+#server:
+#  port: ${PORT:8761}
+#eureka:
+#  server:
+#    enable-self-preservation: false
+#    eviction-interval-timer-in-ms: 30
+#    response-cache-update-interval-ms: 3000
+#  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+#    disable-delta: true
 #  instance:
 #    prefer-ip-address: false
 #spring:
