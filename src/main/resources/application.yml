@@ -9,8 +9,14 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     disable-delta: true
-  instance:
-    prefer-ip-address: false
+#  instance:
+#    prefer-ip-address: false
+#spring:
+#  security:
+#    user:
+#      name: admin
+#      password: admin123
+#
 #spring:
 #  cloud:
 #    inetutils:
